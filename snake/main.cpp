@@ -18,8 +18,10 @@ class Snake{
     bool bottom = false;
     bool left = false;
 
-    void move(){
-        this->parts.erase(this->parts.begin());
+    void move(bool touch){
+        if (!touch){
+            this->parts.erase(this->parts.begin());
+        }
 
         vector <int> head = this->parts[this->parts.size() - 1]; 
 
@@ -36,6 +38,7 @@ class Snake{
 };
 
 Snake snake;
+
 void setUp(){
 }
 void draw(){
@@ -67,7 +70,28 @@ void draw(){
 
 }
 void input(){
-
+    if (_kbhit()){
+        std::cout << _getch();
+        if(_getch() == 119 && !snake.bottom){
+            snake.right = false;
+            snake.left = false;
+            snake.up = true;
+        }else if(_getch() == 97 && !snake.left){
+            snake.bottom = false;
+            snake.up = false;
+            snake.right = true;
+        }else if(_getch() == 115 && !snake.up){
+            snake.right = false;
+            snake.left = false;
+            snake.bottom = true;
+        }else if(_getch() == 100 && snake.right){
+            snake.up = false;
+            snake.bottom = false;
+            snake.left = true;
+        }
+        
+    }
+    // snake.move(false);
 }
 void logic(){
 
@@ -80,7 +104,7 @@ int main(){
         draw();
         input();
         logic();
-        Sleep(200);
+        Sleep(40);
     }
     return 0;
 }
