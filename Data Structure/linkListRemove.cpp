@@ -1,5 +1,4 @@
 #include <iostream>
-using namespace std;
 
 struct Node {
     int data;
@@ -29,12 +28,12 @@ Node* concat(Node* head1 , Node* head2){
     return head1;
 }
 
-void printList(Node* head){
+void coutList(Node* head){
     while (head != nullptr) {
-        cout << head->data << " -> ";
+        std::cout << head->data << " -> ";
         head = head->next;
     }
-    cout << "nullptr" << endl;
+    std::cout << "nullptr" << std::endl;
 }
 
 int main(){
@@ -45,7 +44,7 @@ int main(){
     head1->next->next = new Node(3);
     head1->next->next->prev = head1->next;
     
-    printList(head1);
+    coutList(head1);
 
     Node* head2 = new Node(4);
     head2->prev = nullptr;
@@ -54,10 +53,10 @@ int main(){
     head2->next->next = new Node(6);
     head2->next->next->prev = head2->next;
 
-    printList(head2);
+    coutList(head2);
 
     head1 = concat(head1 , head2);
-    printList(head1);
+    coutList(head1);
 
     return 0;
 }
